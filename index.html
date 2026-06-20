@@ -300,12 +300,31 @@
 
   .cover{
     position:fixed; inset:0; z-index:var(--z-cover); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
     transition:transform 1.05s cubic-bezier(.76,0,.24,1), opacity .7s ease;
-    background:#1b1d12; overflow:hidden;
+    background:
+      radial-gradient(125% 100% at 50% 30%, var(--stage-1) 0%, var(--stage-2) 52%, var(--stage-3) 100%);
+    overflow:hidden;
     font-family:'EB Garamond', serif;
     -webkit-tap-highlight-color:transparent;
   }
   body.is-open .cover{ transform:translateY(-104%); opacity:0; pointer-events:none; }
+
+  /* O painel da capa: tela cheia no celular, retrato enquadrado no desktop */
+  .cover-frame{
+    position:relative; width:100%; height:100%; overflow:hidden; background:#1b1d12;
+  }
+  @media (min-width:680px){
+    .cover{ padding:clamp(20px,4vh,44px); }
+    .cover-frame{
+      width:auto; height:min(90svh, 880px);
+      aspect-ratio:10 / 17; max-width:min(96vw, 520px);
+      border-radius:20px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 50px 110px -34px rgba(0,0,0,.85);
+    }
+  }
   .cover-photo{
     position:absolute; inset:0; width:100%; height:100%;
     object-fit:cover; object-position:50% 34%;
@@ -460,22 +479,24 @@
 
   <!-- ============ THE COVER — foto que abre o convite ============ -->
   <div class="cover" id="cover" role="button" tabindex="0" aria-label="Toque para abrir o convite">
-    <img class="cover-photo" src="images/foto-casal.jpg" alt="Iasmin e Luis" />
-    <div class="cover-overlay"></div>
+    <div class="cover-frame">
+      <img class="cover-photo" src="images/foto-casal.jpg" alt="Iasmin e Luis" />
+      <div class="cover-overlay"></div>
 
-    <div class="cover-top">
-      <div class="kicker">Vamos nos casar</div>
-      <div class="rule"></div>
-    </div>
+      <div class="cover-top">
+        <div class="kicker">Vamos nos casar</div>
+        <div class="rule"></div>
+      </div>
 
-    <div class="cover-bottom">
-      <div class="c-date">29 · Agosto · 2026</div>
-      <div class="c-title">Iasmin<span> &amp; </span>Luis</div>
-      <div class="c-where">Cidade Velha · Belém · Pará</div>
+      <div class="cover-bottom">
+        <div class="c-date">29 · Agosto · 2026</div>
+        <div class="c-title">Iasmin<span> &amp; </span>Luis</div>
+        <div class="c-where">Cidade Velha · Belém · Pará</div>
 
-      <div class="cta">
-        <span class="pill">Abrir o convite <span class="arrow">↓</span></span>
-        <div class="hint">toque ou pressione Enter</div>
+        <div class="cta">
+          <span class="pill">Abrir o convite <span class="arrow">↓</span></span>
+          <div class="hint">toque ou pressione Enter</div>
+        </div>
       </div>
     </div>
     <span class="sr-only">Toque ou pressione Enter para abrir o convite.</span>
