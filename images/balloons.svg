@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="82 48 236 510" role="img" aria-label="Balões">
+  <g fill="none" stroke="#7b5044" stroke-linecap="round" stroke-width="1.8">
+    <path d="M 174.2 183.1 C 160 250, 190 280, 185 330 C 180 380, 205 420, 195 460 C 185 500, 205 520, 190 540"/>
+    <path d="M 250.8 248.1 C 240 290, 200 320, 205 370 C 210 420, 185 450, 200 490 C 210 520, 195 530, 205 545"/>
+    <path d="M 153.8 266.7 C 160 310, 185 340, 185 390 C 185 440, 210 470, 190 510 C 180 530, 195 540, 185 550"/>
+    <path d="M 205.2 214.8 C 210 260, 185 300, 195 350 C 205 400, 190 440, 200 480 C 210 510, 190 530, 200 550"/>
+  </g>
+  <g transform="translate(160, 130) rotate(-15)">
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5"/>
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
+  </g>
+  <g transform="translate(265, 195) rotate(15)">
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5"/>
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
+  </g>
+  <g transform="translate(135, 215) rotate(-20)">
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 C 25,35 45,10 45,-25 C 45,-75 -45,-75 -45,-25 C -45,10 -25,35 0,45 Z" stroke-width="2.5"/>
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 L 5,55 Q 0,56 -5,55 Z" stroke-width="2.5"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M -22,-52 C -38,-40 -42,-15 -42,-2" stroke-width="2"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M -15,-40 C -28,-30 -32,-15 -32,-2" stroke-width="2"/>
+  </g>
+  <g transform="translate(210, 160) rotate(5)">
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5"/>
+    <path fill="#7b5044" stroke="#7b5044" stroke-linejoin="round" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
+    <path fill="none" stroke="#efe2cf" stroke-linecap="round" opacity=".5" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
+  </g>
+</svg>
