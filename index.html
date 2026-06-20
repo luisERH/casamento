@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#191b0b" />
+<meta name="theme-color" content="#1b1d12" />
 <title>Iasmin &amp; Luis — 29 de Agosto de 2026</title>
 <meta name="description" content="Iasmin & Luis convidam para a cerimônia de seu casamento — 29 de agosto de 2026, Largo da 16, Av. 16 de Novembro, Cidade Velha, Belém-PA." />
 
@@ -13,1003 +13,187 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Allura&family=Montserrat:wght@300;400;500;600&family=Zilla+Slab:wght@300;400;500&family=Gloock&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=EB+Garamond:wght@400;500;600&family=Tangerine:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
 <link rel="preload" as="image" href="images/foto-casal.jpg" />
 
 <style>
-  :root{
-    --espresso:#4e1505;
-    --ink:#3c1004;
-    --terra:#7b2a13;
-    --mauve:#7c5144;
-    --cream:#fbf7ef;
-    --cream-2:#f4ecdd;
-    --line:#c9a36b;
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#1b1d12; }
 
-    --gold-1:#f8e7ad;
-    --gold-2:#d7a94e;
-    --gold-3:#a3792f;
-    --gold-4:#6b4a17;
+  @keyframes kb { from{ transform:scale(1.02); } to{ transform:scale(1.16); } }
+  @keyframes fadeUp { from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes fadeDown { from{ opacity:0; transform:translateY(-14px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes bob { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(8px); } }
+  @keyframes lineGrow { from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
 
-    --stage-1:#363a1d;
-    --stage-2:#24270f;
-    --stage-3:#161808;
-
-    --display:'Playfair Display', serif;
-    --script:'Allura', cursive;
-    --sans:'Montserrat', sans-serif;
-    --body:'Zilla Slab', serif;
-    --seal:'Gloock', 'Times New Roman', serif;
-
-    --ease-out:cubic-bezier(.16,1,.3,1);
-    --ease-soft:cubic-bezier(.33,1,.68,1);
-    --ease-hint:cubic-bezier(.42,0,.58,1);
-    --open-t:.30s;      /* selo */
-    --flap-t:.66s;      /* aba — mais lenta e evidente */
-    --flap-d:.16s;      /* delay aba */
-    --lift-t:1.85s;     /* carta: surge no envelope, segura e dá zoom */
-    --lift-d:1.05s;     /* delay carta — depois de ver o "V" de papel pela aba aberta */
-    --cover-fade-d:1.85s;
-    --settle-t:calc(var(--lift-d) + var(--lift-t) + .15s);
-
-    --z-card:1;
-    --z-cover:50;
-    --z-hint:60;
-  }
-
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{ -webkit-text-size-adjust:100%; }
-  body{
-    font-family:var(--body);
-    color:var(--ink);
-    background:
-      radial-gradient(120% 90% at 50% 8%, var(--stage-1) 0%, var(--stage-2) 46%, var(--stage-3) 100%);
-    min-height:100svh;
-  }
-  body.is-sealed,
-  body.is-open:not(.is-settled){ overflow:hidden; height:100svh; }
-  body.is-settled{ overflow-x:hidden; }
-  body.is-open{ overflow-x:hidden; }
-  img{display:block;max-width:100%}
-  a{color:inherit}
-  ::selection{ background:rgba(123,42,19,.18); }
-
-  /* ============================================================
-     INVITATION CARD (the "carta" / presentation letter)
-     Fully responsive, native flow — scrolls when needed.
-     ============================================================ */
-  .invite{
-    position:fixed;
-    inset:0;
-    z-index:var(--z-card);
-    display:flex;
-    justify-content:center;
-    padding:clamp(14px, 4vw, 56px);
-    overflow:hidden;
-    pointer-events:none;
-    visibility:hidden;
-  }
-  /* durante a animação: convite fixo por cima da capa, mesma referência de posição */
-  body.is-open .invite{
-    position:fixed;
-    inset:0;
-    z-index:60;
-    visibility:visible;
-    overflow:hidden;
-    pointer-events:none;
-  }
-  body.is-settled .invite{
-    position:relative;
-    inset:auto;
-    min-height:100svh;
-    overflow:visible;
-    pointer-events:auto;
-  }
-
-  .paper{
-    position:relative;
-    width:min(840px, 100%);
-    background:
-      radial-gradient(76% 56% at 16% 12%, rgba(146,102,52,.16), transparent 60%),
-      radial-gradient(68% 54% at 87% 18%, rgba(116,78,38,.17), transparent 58%),
-      radial-gradient(94% 70% at 80% 92%, rgba(134,92,48,.20), transparent 60%),
-      radial-gradient(60% 50% at 8% 86%, rgba(104,70,34,.16), transparent 56%),
-      radial-gradient(130% 120% at 50% 28%, #ece0c0 0%, #e1cea4 52%, #d3bd8f 100%);
-    border-radius:4px;
-    padding:clamp(26px, 6.2vw, 64px) clamp(20px, 5.4vw, 58px) clamp(30px, 6vw, 60px);
-    box-shadow:
-      inset 0 0 90px rgba(112,72,34,.28),
-      inset 0 0 20px rgba(78,46,18,.28),
-      inset 0 1px 0 rgba(255,250,235,.30),
-      0 40px 90px -30px rgba(20,8,3,.72);
-    transform-origin:50% 0%;
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(0) scale(1);
-  }
-  /* sparse foxing / aging spots */
-  .paper > .age{
-    position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    mix-blend-mode:multiply;opacity:.55;
-    background:
-      radial-gradient(3px 3px at 22% 28%, rgba(120,78,38,.55), transparent 65%),
-      radial-gradient(2px 2px at 73% 18%, rgba(110,70,34,.5), transparent 65%),
-      radial-gradient(2.5px 2.5px at 38% 67%, rgba(120,78,38,.45), transparent 65%),
-      radial-gradient(2px 2px at 84% 58%, rgba(110,70,34,.5), transparent 65%),
-      radial-gradient(2px 2px at 15% 74%, rgba(120,78,38,.45), transparent 65%),
-      radial-gradient(3px 3px at 62% 88%, rgba(110,70,34,.4), transparent 65%),
-      radial-gradient(1.5px 1.5px at 50% 44%, rgba(120,78,38,.4), transparent 65%);
-  }
-  body.is-open .paper{
-    visibility:visible;
-    opacity:0;
-    animation:letterRise var(--lift-t) var(--lift-d) var(--ease-out) forwards;
-  }
-  /* Uma só linha do tempo, um só objeto (a carta real):
-     surge no envelope → ergue um pouco (prévia) → segura → zoom até a tela. */
-  @keyframes letterRise{
-    /* dentro do envelope, miniatura fiel */
-    0%   { opacity:0; transform:translate3d(0, var(--lift-y, 60svh), 0) scale(var(--lift-s, .22)); }
-    6%   { opacity:1; }
-    /* ergue para fora da boca do envelope — prévia legível */
-    26%  { opacity:1; transform:translate3d(0, calc(var(--lift-y, 60svh) * .52), 0) scale(calc(var(--lift-s, .22) * 1.22));
-           animation-timing-function:var(--ease-out); }
-    /* segura a prévia */
-    42%  { opacity:1; transform:translate3d(0, calc(var(--lift-y, 60svh) * .52), 0) scale(calc(var(--lift-s, .22) * 1.22));
-           animation-timing-function:cubic-bezier(.62,0,.2,1); }
-    /* zoom suave até a carta cheia */
-    100% { opacity:1; transform:translate3d(0, 0, 0) scale(1); }
-  }
-
-  /* engraved double frame */
-  .paper::before{
-    content:"";position:absolute;inset:clamp(9px,2.4vw,18px);
-    border:1px solid rgba(123,42,19,.34);
-    border-radius:3px;pointer-events:none;
-  }
-  .paper::after{
-    content:"";position:absolute;inset:clamp(13px,3vw,24px);
-    border:1px solid rgba(201,163,107,.45);
-    border-radius:2px;pointer-events:none;
-  }
-
-  .stack{ position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; }
-
-  /* o conteúdo fica sempre visível — a miniatura precisa ser o convite real,
-     e o próprio zoom é a "revelação". */
-  .reveal{ opacity:1; transform:none; }
-
-  .balloons{ width:clamp(49px,10.2vw,73px); height:auto; margin:clamp(-12px,-2vw,-6px) 0 clamp(16px,3vw,26px); opacity:.95; color:#7b5044; }
-  .balloons .balloon-fill{ fill:currentColor; stroke:currentColor; stroke-linejoin:round; }
-  .balloons .balloon-shine{ fill:none; stroke:#efe2cf; stroke-linecap:round; opacity:.5; }
-  .balloons .balloon-strings{ fill:none; stroke:currentColor; stroke-linecap:round; }
-
-  .intro{
-    font-family:var(--body);
-    font-weight:300;
-    color:var(--espresso);
-    font-size:clamp(13px, 3vw, 19px);
-    line-height:1.6;
-    max-width:58ch;
-    text-wrap:pretty;
-  }
-
-  .logo{
-    width:min(500px, 92%);
-    margin:clamp(20px,4.6vw,38px) auto clamp(12px,2.6vw,20px);
-  }
-
-  .invites-line{
-    font-family:var(--body);
-    font-weight:300;
-    color:var(--espresso);
-    font-size:clamp(14.5px, 3.5vw, 20px);
-    line-height:1.55;
-    max-width:40ch;
-    text-wrap:balance;
-    margin-bottom:clamp(20px,4.4vw,34px);
-  }
-
-  /* ---------- date module: table layout for reliable alignment ---------- */
-  .date{
-    --date-gap:clamp(12px,2.8vw,18px);
-    --date-pad:clamp(14px,4vw,26px);
-    --date-rule:1.6px solid var(--terra);
-    --date-num-anchor:0.41;
-    width:100%;
-    max-width:560px;
-    margin:0 auto clamp(22px,4.6vw,34px);
-    border-collapse:separate;
-    border-spacing:0 var(--date-gap);
-    color:var(--terra);
-    font-family:var(--display);
-    line-height:1;
-    table-layout:fixed;
-  }
-  .date td{
-    padding:0;
-    vertical-align:middle;
-    text-align:center;
-  }
-  .date-center{
-    border-left:var(--date-rule);
-    border-right:var(--date-rule);
-    padding-inline:var(--date-pad);
-  }
-  .date-side{
-    width:33%;
-    border-top:var(--date-rule);
-    border-bottom:var(--date-rule);
-  }
-  .date-side--left{ text-align:right; padding-right:clamp(5px,1.8vw,11px); }
-  .date-side--right{ text-align:left; padding-left:clamp(5px,1.8vw,11px); }
-  .date-side--blank{ border:none; }
-  .date-month{
-    text-transform:uppercase;
-    font-size:clamp(12px,2.8vw,17px);
-    letter-spacing:.4em;
-    padding-right:calc(var(--date-pad) + .4em);
-  }
-  .date-num{
-    font-family:var(--display);
-    font-size:clamp(50px,15vw,88px);
-    font-weight:500;
-    line-height:1;
-  }
-  .date-year{
-    font-size:clamp(11px,2.6vw,15px);
-    letter-spacing:.46em;
-    padding-right:calc(var(--date-pad) + .46em);
-  }
-  .date-side--left span{
-    display:inline-block;
-    text-transform:uppercase;
-    letter-spacing:.06em;
-    font-size:clamp(15px,4vw,27px);
-  }
-  .date-side--right span{
-    display:inline-block;
-    font-size:clamp(15px,4vw,27px);
-  }
-  .date-side--right em{
-    font-style:italic;
-    font-size:.62em;
-    color:var(--mauve);
-    margin-right:.34em;
-  }
-
-  /* ---------- address ---------- */
-  .address{
-    font-family:var(--sans);
-    color:var(--espresso);
-    font-weight:400;
-    font-size:clamp(13px,3.2vw,18px);
-    line-height:1.4;
-    letter-spacing:.02em;
-    margin-bottom:clamp(26px,5.4vw,40px);
-  }
-  .address .venue{
-    display:block;
-    font-weight:600;
-    letter-spacing:.16em;
-    font-size:clamp(15px,3.8vw,21px);
-    margin-bottom:.32em;
-  }
-
-  /* ---------- actions ---------- */
-  .actions{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:clamp(8px,2.4vw,18px);
-    width:100%;
-    max-width:560px;
-  }
-  .action{
-    display:flex;flex-direction:column;align-items:center;gap:8px;
-    text-decoration:none;
-    color:var(--espresso);
-    -webkit-tap-highlight-color:transparent;
-  }
-  /* engraved terracotta medallion — echoes the card's double frame + line art */
-  .action .coin{
-    position:relative;
-    width:clamp(50px,14.5vw,72px);
-    aspect-ratio:1;
-    border-radius:50%;
-    display:grid;place-items:center;
-    color:var(--terra);
-    background:transparent;
-    border:1.6px solid var(--terra);
-    box-shadow:0 6px 14px -10px rgba(78,21,5,.4);
-    transition:transform .4s var(--ease-out), background-color .4s var(--ease-out),
-               color .4s var(--ease-out), box-shadow .4s var(--ease-out);
-  }
-  .action .coin::before{
-    content:"";position:absolute;inset:4px;border-radius:50%;
-    border:1px solid rgba(123,42,19,.38);
-    transition:border-color .4s var(--ease-out);
-  }
-  .action .coin svg{ width:42%; height:42%; stroke:currentColor; position:relative; z-index:1; }
-  .action .label{
-    font-family:var(--display);
-    font-weight:500;
-    font-size:clamp(10px,2.7vw,14px);
-    line-height:1.18;
-    color:var(--ink);
-    letter-spacing:.01em;
-    text-wrap:balance;
-  }
-  @media (hover:hover){
-    .action:hover .coin,.action:focus-visible .coin{
-      transform:translateY(-3px);
-      background:var(--terra);
-      color:var(--cream);
-      box-shadow:0 14px 24px -12px rgba(78,21,5,.55);
-    }
-    .action:hover .coin::before,.action:focus-visible .coin::before{ border-color:rgba(251,247,239,.5); }
-  }
-  .action:active .coin{ transform:translateY(-1px) scale(.97); background:var(--terra); color:var(--cream); }
-  .action:focus-visible{ outline:none; }
-  .action:focus-visible .coin{ outline:2px solid var(--terra); outline-offset:4px; }
-
-  /* ============================================================
-     COVER — a closed parchment invitation on a dark stage that
-     opens (folds away) on click. The wax seal holds it shut.
-     ============================================================ */
-  .cover{
-    position:fixed;inset:0;z-index:var(--z-cover);
-    display:flex;align-items:center;justify-content:center;
-    padding:max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom));
-    cursor:pointer;
-    perspective:1700px;
-    background:
-      radial-gradient(125% 100% at 50% 40%, var(--stage-1) 0%, var(--stage-2) 50%, var(--stage-3) 100%);
-    overflow:hidden;
-    -webkit-tap-highlight-color:transparent;
-  }
-  body.is-open .cover{ animation:coverFade .5s var(--cover-fade-d) var(--ease-soft) forwards; pointer-events:none; }
-  @keyframes coverFade{ to{ opacity:0; visibility:hidden; } }
-
-  .dust{ position:absolute;inset:0;pointer-events:none;overflow:hidden; }
-  .dust i{
-    position:absolute;bottom:-12px;
-    width:var(--s);height:var(--s);border-radius:50%;
-    background:radial-gradient(circle, rgba(248,231,173,.95), rgba(215,169,78,0) 70%);
-    opacity:0;
-    animation:float var(--dur) linear var(--delay) infinite;
-  }
-  @keyframes float{
-    0%{ transform:translateY(0) translateX(0); opacity:0; }
-    12%{ opacity:var(--op); }
-    88%{ opacity:var(--op); }
-    100%{ transform:translateY(-104svh) translateX(var(--drift)); opacity:0; }
-  }
-
-  /* closed invitation: couple photo + names + wax-sealed envelope */
-  .cover-card{
-    position:relative;
-    width:min(440px, 92vw, 46svh);
-    display:flex;flex-direction:column;align-items:center;text-align:center;
-    padding:clamp(15px,4.2vw,22px) clamp(15px,4.2vw,22px) clamp(18px,4.6vw,26px);
-    border-radius:7px;
-    background:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E"),
-      radial-gradient(125% 100% at 50% 0%, #fbf6ec 0%, #f4ecda 58%, #ece1cb 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.6),
-      inset 0 0 48px rgba(112,72,34,.12),
-      0 50px 92px -34px rgba(6,3,1,.85);
-    transform-origin:50% 50%;
-    transition:transform .55s var(--ease-out), box-shadow .55s var(--ease-out);
-  }
-  .cover:active .cover-card{
-    transform:scale(.986) translateY(1px);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.6),
-      inset 0 0 48px rgba(112,72,34,.12),
-      0 38px 72px -34px rgba(6,3,1,.78);
-  }
-  body.is-open .cover-card{ transition:none; }
-  .cover-card::before{
-    content:"";position:absolute;inset:clamp(8px,2.2vw,12px);
-    border:1px solid rgba(123,42,19,.14);border-radius:5px;pointer-events:none;
-  }
-  .cover-card::after{ content:none; }
-
-
-  .cc-photo{
-    position:relative;width:100%;aspect-ratio:8/9;overflow:hidden;
-  }
-  .cc-photo img{
-    width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;
-    --fade:
-      linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%),
-      linear-gradient(to bottom, transparent 0, #000 9%, #000 90%, transparent 100%);
-    -webkit-mask:var(--fade);
-    -webkit-mask-composite:source-in;
-    mask:var(--fade);
-    mask-composite:intersect;
-  }
-
-  .cc-names{
-    font-family:var(--script);color:var(--mauve);
-    font-size:clamp(23px,6.6vw,34px);line-height:.9;opacity:.9;
-    margin:clamp(2px,1.4vw,8px) 0 clamp(2px,1vw,5px);
-  }
-
-  /* envelope graphic */
-  .envelope{
-    position:relative;width:100%;aspect-ratio:calc(1.16 / 0.85);
-    margin:clamp(4px,1.4vw,8px) auto 0;
-    perspective:900px;
-    transform-style:preserve-3d;
-    isolation:isolate;
-  }
-  .envelope::before{
-    content:"";position:absolute;left:4%;right:4%;bottom:-7%;height:28%;z-index:0;pointer-events:none;
-    background:radial-gradient(ellipse 88% 70% at 50% 0%, rgba(16,20,8,.34), transparent 72%);
-    filter:blur(7px);
-  }
-  .envelope::after{ content:none; }
-  .env-body{
-    position:absolute;inset:0;border-radius:6px;z-index:1;
-    background:
-      radial-gradient(ellipse 90% 40% at 50% 0%, rgba(255,255,255,.1), transparent 62%),
-      linear-gradient(180deg, #8a9064 0%, #7a8058 55%, #707656 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.2),
-      inset 0 -20px 28px rgba(32,38,16,.1),
-      0 16px 28px -10px rgba(16,20,8,.52),
-      0 6px 14px -4px rgba(16,20,8,.34);
-  }
-  .env-body::before,
-  .env-body::after{ content:none; }
-  .env-fold{ display:none; }
-  .env-pocket{
-    position:absolute;inset:0;border-radius:6px;overflow:hidden;z-index:3;
-    background:linear-gradient(180deg, rgba(32,38,16,.07) 0%, transparent 42%);
-    clip-path:polygon(0 17%, 50% 57%, 100% 17%, 100% 100%, 0 100%);
-    pointer-events:none;
-    box-shadow:inset 0 10px 18px -8px rgba(28,32,14,.18);
-  }
-  .env-pocket::before,
-  .env-pocket::after{ content:none; }
-  .env-lip{ display:none; }
-  /* o "V" de papel dentro do envelope: um triângulo de pergaminho que a aba
-     fechada esconde por completo e que é revelado conforme a aba sobe — dando
-     a entender que a carta estava lá dentro. A carta real (zoom) cobre por cima. */
-  .env-letter{
-    position:absolute;left:14%;right:14%;top:12%;bottom:46%;z-index:2;
-    pointer-events:none;opacity:1;
-    clip-path:polygon(0 0, 100% 0, 50% 100%);
-    background:
-      linear-gradient(180deg, rgba(40,28,10,.12), transparent 24%),
-      radial-gradient(130% 130% at 50% 0%, #ece0c0 0%, #e1cea4 55%, #d3bd8f 100%);
-    box-shadow:inset 0 1px 0 rgba(255,250,235,.4);
-  }
-  .env-letter__inner{ display:none; }
-  /* some por baixo da carta real assim que ela começa a subir (cobre o V) */
-  body.is-open .env-letter{ animation:envLetterOut .5s calc(var(--lift-d) + .15s) var(--ease-out) forwards; }
-  @keyframes envLetterOut{ to{ opacity:0; } }
-  .env-stain{ display:none; }
-  .env-flap{
-    position:absolute;left:0;top:0;width:100%;height:68%;z-index:5;
-    clip-path:polygon(0 0, 100% 0, 50% 100%);
-    background:
-      radial-gradient(ellipse 78% 52% at 50% 6%, rgba(255,255,255,.22), transparent 56%),
-      linear-gradient(177deg, #c2ca96 0%, #aeb680 44%, #98a06a 74%, #868d5c 100%);
-    transform-origin:50% 0%;
-    transform-style:preserve-3d;
-    backface-visibility:hidden;
-    box-shadow:
-      0 18px 26px -8px rgba(10,14,5,.55),
-      0 6px 12px rgba(10,14,5,.30),
-      inset 0 1px 0 rgba(255,255,255,.38),
-      inset 0 -14px 22px rgba(30,36,15,.18);
-  }
-  /* arestas diagonais da tampa — dão volume e deixam claro que é uma aba */
-  .env-flap::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    clip-path:polygon(0 0, 100% 0, 50% 100%);
-    background:
-      linear-gradient(126deg, transparent calc(50% - 1px), rgba(28,32,14,.30) 50%, transparent calc(50% + 1px)) left  / 50% 100% no-repeat,
-      linear-gradient(234deg, transparent calc(50% - 1px), rgba(28,32,14,.30) 50%, transparent calc(50% + 1px)) right / 50% 100% no-repeat;
-  }
-  /* vinco central da tampa */
-  .env-flap::after{
-    content:"";position:absolute;left:50%;top:0;width:1.5px;height:100%;transform:translateX(-50%);
-    pointer-events:none;
-    background:linear-gradient(180deg, rgba(255,255,255,.28), rgba(30,36,15,.20) 60%, transparent);
-    opacity:.7;
-  }
-  /* wax seal — visual de cera no repouso; troca de cor só no hover */
-  .env-seal{
-    position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);
-    width:14%;aspect-ratio:1;
-    border-radius:48% 52% 50% 48% / 47% 50% 53% 49%;
-    z-index:6;
-    display:grid;place-items:center;
-    color:#f7ead6;
-    border:1.6px solid #4a1505;
-    background:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='96' height='96' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E"),
-      radial-gradient(ellipse 78% 62% at 32% 28%, rgba(255,201,166,.40), transparent 56%),
-      radial-gradient(ellipse 58% 48% at 70% 74%, rgba(36,9,3,.40), transparent 60%),
-      radial-gradient(circle at 50% 52%, #a6431f 0%, #8d341a 36%, #762810 70%, #551a09 100%);
-    box-shadow:
-      0 6px 14px -8px rgba(36,9,3,.55),
-      inset 0 1px 0 rgba(255,206,176,.34),
-      inset 0 -5px 10px rgba(36,9,3,.32);
-    transition:transform .4s var(--ease-out), background .4s var(--ease-out), background-color .4s var(--ease-out),
-               color .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .4s var(--ease-out);
-  }
-  .env-seal::before{
-    content:"";position:absolute;inset:4px;
-    border-radius:47% 53% 49% 51% / 50% 46% 54% 50%;
-    border:1px solid rgba(60,16,8,.48);
-    transition:border-color .4s var(--ease-out);
-  }
-  .env-seal::after{
-    content:"";position:absolute;inset:-3%;border-radius:inherit;pointer-events:none;
-    border:1px solid rgba(38,11,4,.20);
-    box-shadow:0 0 0 .5px rgba(150,64,38,.22);
-    opacity:.75;
-  }
-  .env-seal .seal-mark{
-    width:70%;height:auto;position:relative;z-index:2;display:block;overflow:visible;
-    color:inherit;
-  }
-  .env-seal .seal-balloons{ overflow:visible; color:inherit; }
-  .env-seal .seal-balloons .balloon-fill{
-    fill:currentColor;
-    stroke:currentColor;
-  }
-  .env-seal .seal-balloons .balloon-shine{
-    fill:none;
-    stroke:currentColor;
-    stroke-linecap:round;
-    opacity:.62;
-  }
-  .env-seal .seal-balloons .balloon-strings{
-    fill:none;
-    stroke:currentColor;
-    stroke-linecap:round;
-  }
-  @media (hover:hover){
-    .cover:hover .env-seal{
-      transform:translate(-50%, calc(-50% - 3px));
-      background:var(--espresso);
-      color:var(--cream);
-      border-color:var(--espresso);
-      box-shadow:0 14px 24px -12px rgba(40,10,3,.6);
-    }
-    .cover:hover .env-seal::before{ border-color:rgba(251,247,239,.5); }
-  }
-  .cover:focus-visible .env-seal{ outline:2px solid var(--espresso); outline-offset:4px; }
-  @media (hover:hover){
-    .cover:focus-visible .env-seal{
-      transform:translate(-50%, calc(-50% - 3px));
-      background:var(--espresso);
-      color:var(--cream);
-      border-color:var(--espresso);
-      box-shadow:0 14px 24px -12px rgba(40,10,3,.6);
-    }
-    .cover:focus-visible .env-seal::before{ border-color:rgba(251,247,239,.5); }
-  }
-  .cover:active .env-seal{
-    transform:translate(-50%, calc(-50% - 1px)) scale(.97);
-    background:var(--espresso);
-    color:var(--cream);
-    border-color:var(--espresso);
-  }
-  .cover:active .env-seal::before{ border-color:rgba(251,247,239,.5); }
-  .env-flash{
-    position:absolute;inset:-55%;border-radius:50%;pointer-events:none;opacity:0;z-index:5;
-    background:radial-gradient(circle, rgba(228,170,134,.5), rgba(228,170,134,0) 62%);
-  }
-  .env-hint{
-    position:absolute;left:0;right:0;top:79%;z-index:5;
-    display:flex;flex-direction:column;align-items:center;gap:clamp(3px,.8vw,5px);
-    font-family:var(--sans);font-weight:300;
-    text-transform:uppercase;letter-spacing:.16em;padding-left:.16em;
-    font-size:clamp(6.5px,1.45vw,8px);
-    color:rgba(88,82,62,.42);
-    text-shadow:none;
-    pointer-events:none;
-    animation:hintFloat 4.8s var(--ease-hint) infinite;
-  }
-  .env-hint__cue{
-    display:block;width:5px;height:5px;
-    border-right:1px solid currentColor;border-bottom:1px solid currentColor;
-    transform:rotate(45deg);
-    opacity:.45;
-    animation:hintCue 4.8s var(--ease-hint) infinite;
-  }
-  @keyframes hintFloat{
-    0%,100%{ opacity:.3; transform:translateY(0); }
-    50%{ opacity:.5; transform:translateY(3px); }
-  }
-  @keyframes hintCue{
-    0%,100%{ transform:rotate(45deg) translateY(-2px); opacity:.32; }
-    50%{ transform:rotate(45deg) translateY(3px); opacity:.58; }
-  }
-
-  /* ---- opening sequence — uma linha do tempo só, sem pausa ---- */
-  body.is-open .env-seal{ animation:sealPop var(--open-t) var(--ease-out) forwards; }
-  @keyframes sealPop{
-    0%{ transform:translate3d(-50%,-50%,0) scale(1); opacity:1; }
-    100%{ transform:translate3d(-50%,-58%,0) scale(1.12); opacity:0; }
-  }
-  body.is-open .env-flash{ animation:flashFire var(--open-t) var(--ease-soft) forwards; }
-  @keyframes flashFire{
-    0%{ opacity:0; transform:scale(.7); }
-    40%{ opacity:.55; transform:scale(1); }
-    100%{ opacity:0; transform:scale(1.3); }
-  }
-  body.is-open .env-hint{ animation:hintExit .22s var(--ease-out) forwards; }
-  @keyframes hintExit{
-    to{ opacity:0; transform:translate3d(0, 4px, 0); }
-  }
-  body.is-open .env-flap{ animation:flapOpen var(--flap-t) var(--flap-d) cubic-bezier(.5,0,.2,1) forwards; }
-  @keyframes flapOpen{
-    from{ transform:rotateX(0deg); }
-    to{ transform:rotateX(-176deg); }
-  }
-
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
-
-  /* Força animações completas mesmo com "reduzir movimento" no SO/navegador */
   @media (prefers-reduced-motion: reduce){
-    .dust{ display:block !important; }
-    .dust i{ animation:float var(--dur) linear var(--delay) infinite !important; }
-    .env-hint{ animation:hintFloat 4.8s var(--ease-hint) infinite !important; }
-    .env-hint__cue{ animation:hintCue 4.8s var(--ease-hint) infinite !important; }
-    body.is-open .env-seal{ animation:sealPop var(--open-t) var(--ease-out) forwards !important; }
-    body.is-open .env-flash{ animation:flashFire var(--open-t) var(--ease-soft) forwards !important; }
-    body.is-open .env-hint{ animation:hintExit .22s var(--ease-out) forwards !important; }
-    body.is-open .env-flap{ animation:flapOpen var(--flap-t) var(--flap-d) cubic-bezier(.5,0,.2,1) forwards !important; }
-    body.is-open .env-letter{ animation:envLetterOut .5s calc(var(--lift-d) + .15s) var(--ease-out) forwards !important; }
-    body.is-open .cover{ animation:coverFade .5s var(--cover-fade-d) var(--ease-soft) forwards !important; }
-    body.is-open .paper{ animation:letterRise var(--lift-t) var(--lift-d) var(--ease-out) forwards !important; }
+    *{ animation-duration:0.001ms !important; animation-delay:0ms !important; animation-iteration-count:1 !important; }
   }
 
-  /* very small phones: keep the date frame, just tighten it */
-  @media (max-width:340px){
-    .date{ --date-pad:10px; }
+  .stage{
+    position:relative; width:100%; height:100vh; min-height:100dvh;
+    overflow:hidden; background:#1b1d12; font-family:'EB Garamond', serif;
   }
+
+  /* ===== Convite revelado (atrás) ===== */
+  .reveal{
+    position:absolute; inset:0; z-index:1;
+    background:#f5efe4; color:#3a3526;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:64px 32px;
+  }
+  .back-btn{
+    position:absolute; top:24px; left:24px;
+    border:1px solid #d8ccae; background:transparent; color:#7a715b;
+    font-family:'EB Garamond', serif; font-size:12px; letter-spacing:2px;
+    text-transform:uppercase; padding:9px 16px; border-radius:999px; cursor:pointer;
+    transition:background .25s ease;
+  }
+  .back-btn:hover{ background:#ece2cf; }
+
+  .eyebrow{ letter-spacing:5px; text-transform:uppercase; font-size:12px; color:#8a8169; }
+  .names{ font-family:'Pinyon Script', cursive; font-size:56px; color:#b3674b; margin:10px 0 16px; line-height:1; }
+  .flourish{ color:#c4b890; font-size:18px; margin-bottom:18px; }
+
+  .date-row{
+    display:flex; align-items:stretch; gap:22px;
+    border-top:1px solid #d8ccae; border-bottom:1px solid #d8ccae;
+    padding:16px 8px; margin:2px 0 22px;
+  }
+  .date-side{ align-self:center; letter-spacing:3px; text-transform:uppercase; font-size:13px; color:#5f5945; }
+  .date-mid{ text-align:center; padding:0 18px; border-left:1px solid #d8ccae; border-right:1px solid #d8ccae; }
+  .date-month{ letter-spacing:3px; text-transform:uppercase; font-size:12px; color:#8a8169; }
+  .date-day{ font-size:56px; line-height:1; font-family:'Cormorant Garamond', serif; font-weight:600; color:#3a3526; }
+  .date-year{ letter-spacing:3px; font-size:13px; color:#8a8169; }
+
+  .place{ font-size:15px; letter-spacing:1px; color:#6f6a5a; line-height:1.7; }
+
+  .actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:26px; }
+  .btn-primary{
+    background:#9d5a40; color:#fbf6ec; font-size:12px; letter-spacing:1.5px;
+    text-transform:uppercase; padding:12px 20px; border-radius:999px; text-decoration:none;
+  }
+  .btn-ghost{
+    border:1px solid #b89a6f; color:#7a6a4a; font-size:12px; letter-spacing:1.5px;
+    text-transform:uppercase; padding:12px 20px; border-radius:999px; text-decoration:none;
+  }
+  .reveal-foot{ position:absolute; bottom:30px; left:0; right:0; font-size:12px; letter-spacing:1px; color:#b3a98f; font-style:italic; }
+
+  /* ===== Capa (frente) ===== */
+  .cover{
+    position:absolute; inset:0; z-index:2; cursor:pointer;
+    transition:transform 1.05s cubic-bezier(.76,0,.24,1), opacity .7s ease;
+    background:#1b1d12; overflow:hidden;
+  }
+  .cover.open{ transform:translateY(-104%); opacity:0; }
+  .cover-photo{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:50% 34%;
+    animation:kb 22s ease-in-out infinite alternate;
+  }
+  .cover-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(18,20,11,.62) 0%, rgba(18,20,11,.05) 20%, rgba(18,20,11,.05) 40%, rgba(18,20,11,.52) 68%, rgba(18,20,11,.94) 100%);
+  }
+  .cover-top{ position:absolute; top:0; left:0; right:0; padding:clamp(40px,7vh,72px) 28px 0; text-align:center; }
+  .cover-top .kicker{ font-family:'EB Garamond', serif; color:rgba(255,255,255,.92); letter-spacing:8px; font-size:13px; text-transform:uppercase; animation:fadeDown 1.3s ease both; }
+  .cover-top .rule{ width:42px; height:1px; background:rgba(255,255,255,.6); margin:16px auto 0; transform-origin:center; animation:lineGrow 1.2s .4s both; }
+
+  .cover-bottom{ position:absolute; left:0; right:0; bottom:0; padding:0 26px clamp(40px,7vh,64px); text-align:center; }
+  .cover-bottom .date{ font-family:'EB Garamond', serif; color:rgba(255,255,255,.92); letter-spacing:7px; font-size:13px; text-transform:uppercase; margin-bottom:4px; animation:fadeUp 1.1s .15s both; }
+  .cover-bottom .title{ font-family:'Tangerine', cursive; color:#fff; font-size:clamp(74px, 13.5vw, 112px); line-height:.78; font-weight:700; text-shadow:0 4px 28px rgba(0,0,0,.42); animation:fadeUp 1.3s .3s both; }
+  .cover-bottom .title span{ font-style:italic; }
+  .cover-bottom .where{ font-family:'EB Garamond', serif; color:rgba(255,255,255,.86); letter-spacing:4px; font-size:12px; text-transform:uppercase; margin-top:18px; animation:fadeUp 1.1s .45s both; }
+
+  .cta{ margin-top:30px; animation:fadeUp 1.1s .6s both; }
+  .cta .pill{
+    display:inline-flex; align-items:center; gap:11px; padding:14px 30px;
+    border:1px solid rgba(255,255,255,.62); border-radius:999px; background:rgba(255,255,255,.08);
+    color:#fff; font-family:'EB Garamond', serif; letter-spacing:3px; font-size:12px; text-transform:uppercase;
+  }
+  .cta .pill .arrow{ display:inline-block; animation:bob 2s ease-in-out infinite; }
+  .cta .hint{ margin-top:16px; font-size:11px; letter-spacing:1px; color:rgba(255,255,255,.62); }
 </style>
 </head>
-<body class="is-sealed">
+<body>
+<div class="stage">
 
-  <!-- ============ THE CARTA (revealed invitation) ============ -->
-  <main class="invite" aria-hidden="true">
-    <article class="paper">
-      <div class="age" aria-hidden="true"></div>
-      <div class="stack">
+  <!-- ===== Convite revelado (atrás) ===== -->
+  <div class="reveal">
+    <button class="back-btn" type="button" data-close>‹ Voltar</button>
 
-        <svg class="balloons reveal" style="--d:.78s" viewBox="82 48 236 510" role="img" aria-label="Balões">
-          <g class="balloon-strings" stroke-width="1.8">
-            <path d="M 174.2 183.1 C 160 250, 190 280, 185 330 C 180 380, 205 420, 195 460 C 185 500, 205 520, 190 540"/>
-            <path d="M 250.8 248.1 C 240 290, 200 320, 205 370 C 210 420, 185 450, 200 490 C 210 520, 195 530, 205 545"/>
-            <path d="M 153.8 266.7 C 160 310, 185 340, 185 390 C 185 440, 210 470, 190 510 C 180 530, 195 540, 185 550"/>
-            <path d="M 205.2 214.8 C 210 260, 185 300, 195 350 C 205 400, 190 440, 200 480 C 210 510, 190 530, 200 550"/>
-          </g>
-          <g transform="translate(160, 130) rotate(-15)">
-            <path class="balloon-fill" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5"/>
-            <path class="balloon-fill" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5"/>
-            <path class="balloon-shine" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
-            <path class="balloon-shine" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
-          </g>
-          <g transform="translate(265, 195) rotate(15)">
-            <path class="balloon-fill" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5"/>
-            <path class="balloon-fill" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5"/>
-            <path class="balloon-shine" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
-            <path class="balloon-shine" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
-          </g>
-          <g transform="translate(135, 215) rotate(-20)">
-            <path class="balloon-fill" d="M 0,45 C 25,35 45,10 45,-25 C 45,-75 -45,-75 -45,-25 C -45,10 -25,35 0,45 Z" stroke-width="2.5"/>
-            <path class="balloon-fill" d="M 0,45 L 5,55 Q 0,56 -5,55 Z" stroke-width="2.5"/>
-            <path class="balloon-shine" d="M -22,-52 C -38,-40 -42,-15 -42,-2" stroke-width="2"/>
-            <path class="balloon-shine" d="M -15,-40 C -28,-30 -32,-15 -32,-2" stroke-width="2"/>
-          </g>
-          <g transform="translate(210, 160) rotate(5)">
-            <path class="balloon-fill" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5"/>
-            <path class="balloon-fill" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5"/>
-            <path class="balloon-shine" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
-            <path class="balloon-shine" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
-          </g>
-        </svg>
+    <div class="eyebrow">Convidam para a cerimônia de seu casamento</div>
+    <div class="names">Iasmin &amp; Luis</div>
+    <div class="flourish">&#10086;</div>
 
-        <p class="intro reveal" style="--d:.40s">A maior aventura das nossas vidas está mais próxima do que nunca.<br>E você não poderia ficar de fora dessa!</p>
-
-        <img class="logo reveal" style="--d:.52s" src="images/logo.png" alt="Iasmin e Luis" />
-
-        <p class="invites-line reveal" style="--d:.64s">Convidam para a cerimônia de seu casamento, que será realizada no dia</p>
-
-        <table class="date reveal" style="--d:.76s">
-          <tbody>
-            <tr>
-              <td class="date-side date-side--blank"></td>
-              <td class="date-center date-month">Agosto</td>
-              <td class="date-side date-side--blank"></td>
-            </tr>
-            <tr>
-              <td class="date-side date-side--left"><span>Sábado</span></td>
-              <td class="date-center date-num">29</td>
-              <td class="date-side date-side--right"><span><em>às</em>20:30</span></td>
-            </tr>
-            <tr>
-              <td class="date-side date-side--blank"></td>
-              <td class="date-center date-year">2026</td>
-              <td class="date-side date-side--blank"></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p class="address reveal" style="--d:.88s">
-          <span class="venue">Largo da 16</span>
-          Av. 16 de Novembro, 41<br>Cidade Velha · Belém · Pará
-        </p>
-
-        <nav class="actions reveal" style="--d:1s" aria-label="Ações do convite">
-          <a class="action" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/search/?api=1&amp;query=Largo+da+16+Av.+16+de+Novembro+41+Cidade+Velha+Bel%C3%A9m+PA">
-            <span class="coin" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-            </span>
-            <span class="label">Como chegar</span>
-          </a>
-
-          <a class="action" href="#" data-needs-link>
-            <span class="coin" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.4 2.6 2.6L16 9.4"/></svg>
-            </span>
-            <span class="label">Confirmar presença</span>
-          </a>
-
-          <a class="action" href="#" data-needs-link>
-            <span class="coin" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="13" r="5"/><circle cx="15" cy="13" r="5"/><path d="M9 8.2 7.4 4.6h3.2L9 8.2Zm6 0L13.4 4.6h3.2L15 8.2Z"/></svg>
-            </span>
-            <span class="label">Site dos noivos</span>
-          </a>
-
-          <a class="action" href="#" data-needs-link>
-            <span class="coin" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16v11H4z"/><path d="M4 9V7h16v2M12 9v11M9.5 7C8 7 7 5.8 7 4.6 7 3.7 7.7 3 8.6 3 10.3 3 12 6 12 7M14.5 7c1.5 0 2.5-1.2 2.5-2.4 0-.9-.7-1.6-1.6-1.6C13.7 3 12 6 12 7"/></svg>
-            </span>
-            <span class="label">Lista de presentes</span>
-          </a>
-        </nav>
-
+    <div class="date-row">
+      <div class="date-side">Sábado</div>
+      <div class="date-mid">
+        <div class="date-month">Agosto</div>
+        <div class="date-day">29</div>
+        <div class="date-year">2026</div>
       </div>
-    </article>
-  </main>
+      <div class="date-side">às<br>20:30</div>
+    </div>
 
-  <!-- ============ THE COVER — closed invitation that opens ============ -->
-  <div class="cover" id="cover" role="button" tabindex="0" aria-label="Toque para abrir o convite">
-    <div class="dust" id="dust" aria-hidden="true"></div>
+    <div class="place">Largo da 16 · Av. 16 de Novembro, 41<br>Cidade Velha · Belém · Pará</div>
 
-    <div class="cover-card">
-      <div class="cc-photo">
-        <img
-          src="images/foto-casal.jpg"
-          srcset="images/foto-casal.jpg 900w"
-          sizes="(max-width: 480px) 92vw, 440px"
-          width="900"
-          height="1125"
-          decoding="async"
-          fetchpriority="high"
-          alt="Iasmin e Luis"
-        />
-      </div>
+    <div class="actions">
+      <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=Largo+da+16+Av.+16+de+Novembro+41+Cidade+Velha+Belém+PA" target="_blank" rel="noopener">Como chegar</a>
+      <a class="btn-ghost" href="#">Confirmar presença</a>
+    </div>
 
-      <span class="cc-names">Iasmin &amp; Luis</span>
+    <div class="reveal-foot">o seu convite atual permanece igual</div>
+  </div>
 
-      <div class="envelope">
-        <div class="env-body"></div>
-        <div class="env-letter" aria-hidden="true">
-          <div class="env-letter__inner">
-            <img class="env-letter__balloons" src="images/balloons.svg" alt="" />
-            <img class="env-letter__logo" src="images/logo.png" alt="" />
-            <p class="env-letter__line">Convidam para a cerimônia de seu casamento</p>
-            <p class="env-letter__date">29 · AGOSTO · 2026</p>
-          </div>
-        </div>
-        <div class="env-fold env-fold--l" aria-hidden="true"></div>
-        <div class="env-fold env-fold--r" aria-hidden="true"></div>
-        <div class="env-pocket"></div>
-        <div class="env-lip" aria-hidden="true"></div>
-        <div class="env-flap"></div>
-        <div class="env-stain" aria-hidden="true"></div>
-        <div class="env-seal">
-          <svg class="seal-mark" viewBox="0 0 100 100" aria-hidden="true" role="img">
-            <defs>
-              <filter id="waxStamp" x="-35%" y="-35%" width="170%" height="170%">
-                <feDropShadow dx="0" dy=".9" stdDeviation=".18" flood-color="#3c1004" flood-opacity=".55"/>
-                <feDropShadow dx="0" dy="-.5" stdDeviation=".1" flood-color="#fbf7ef" flood-opacity=".22"/>
-              </filter>
-            </defs>
-            <g class="seal-letters" filter="url(#waxStamp)" fill="currentColor">
-              <text x="24" y="67" text-anchor="middle"
-                    font-family="'Gloock', 'Times New Roman', serif" font-size="30" letter-spacing=".02em">I</text>
-              <text x="76" y="67" text-anchor="middle"
-                    font-family="'Gloock', 'Times New Roman', serif" font-size="30" letter-spacing=".02em">L</text>
-            </g>
-            <g class="seal-balloons" transform="translate(26, 8) scale(0.12)" aria-hidden="true">
-              <g class="balloon-strings" stroke-width="1.8">
-                <path d="M 174.2 183.1 C 160 250, 190 280, 185 330 C 180 380, 205 420, 195 460 C 185 500, 205 520, 190 540"/>
-                <path d="M 250.8 248.1 C 240 290, 200 320, 205 370 C 210 420, 185 450, 200 490 C 210 520, 195 530, 205 545"/>
-                <path d="M 153.8 266.7 C 160 310, 185 340, 185 390 C 185 440, 210 470, 190 510 C 180 530, 195 540, 185 550"/>
-                <path d="M 205.2 214.8 C 210 260, 185 300, 195 350 C 205 400, 190 440, 200 480 C 210 510, 190 530, 200 550"/>
-              </g>
-              <g transform="translate(160, 130) rotate(-15)">
-                <path class="balloon-fill" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-fill" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-shine" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
-                <path class="balloon-shine" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
-              </g>
-              <g transform="translate(265, 195) rotate(15)">
-                <path class="balloon-fill" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-fill" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-shine" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
-                <path class="balloon-shine" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
-              </g>
-              <g transform="translate(135, 215) rotate(-20)">
-                <path class="balloon-fill" d="M 0,45 C 25,35 45,10 45,-25 C 45,-75 -45,-75 -45,-25 C -45,10 -25,35 0,45 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-fill" d="M 0,45 L 5,55 Q 0,56 -5,55 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-shine" d="M -22,-52 C -38,-40 -42,-15 -42,-2" stroke-width="2"/>
-                <path class="balloon-shine" d="M -15,-40 C -28,-30 -32,-15 -32,-2" stroke-width="2"/>
-              </g>
-              <g transform="translate(210, 160) rotate(5)">
-                <path class="balloon-fill" d="M 0,45 C -25,35 -45,10 -45,-25 C -45,-75 45,-75 45,-25 C 45,10 25,35 0,45 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-fill" d="M 0,45 L -5,55 Q 0,56 5,55 Z" stroke-width="2.5" stroke-linejoin="round"/>
-                <path class="balloon-shine" d="M 22,-52 C 38,-40 42,-15 42,-2" stroke-width="2"/>
-                <path class="balloon-shine" d="M 15,-40 C 28,-30 32,-15 32,-2" stroke-width="2"/>
-              </g>
-            </g>
-          </svg>
-        </div>
-        <div class="env-flash" aria-hidden="true"></div>
-        <span class="env-hint"><span class="env-hint__text">Clique para abrir</span><span class="env-hint__cue" aria-hidden="true"></span></span>
+  <!-- ===== Capa (frente) ===== -->
+  <div class="cover" data-cover role="button" tabindex="0" aria-label="Abrir o convite">
+    <img class="cover-photo" src="images/foto-casal.jpg" alt="Iasmin e Luis" />
+    <div class="cover-overlay" data-overlay></div>
+
+    <div class="cover-top">
+      <div class="kicker">Vamos nos casar</div>
+      <div class="rule"></div>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="date">29 · Agosto · 2026</div>
+      <div class="title">Iasmin<span> &amp; </span>Luis</div>
+      <div class="where">Cidade Velha · Belém · Pará</div>
+
+      <div class="cta">
+        <span class="pill">Abrir o convite <span class="arrow">↓</span></span>
+        <div class="hint">toque ou pressione Enter</div>
       </div>
     </div>
-    <span class="sr-only">Toque ou pressione Enter para abrir o convite.</span>
   </div>
+</div>
 
 <script>
   (function(){
-    'use strict';
-    var body = document.body;
-    var cover = document.getElementById('cover');
+    var cover = document.querySelector('[data-cover]');
+    var closeBtn = document.querySelector('[data-close]');
     var opened = false;
-    var settled = false;
-
-    /* ---- gold dust particles ---- */
-    var dust = document.getElementById('dust');
-    var frag = document.createDocumentFragment();
-    for(var i=0;i<22;i++){
-      var p = document.createElement('i');
-      var s = (Math.random()*4 + 2).toFixed(1);
-      p.style.setProperty('--s', s+'px');
-      p.style.left = (Math.random()*100).toFixed(2)+'%';
-      p.style.setProperty('--dur', (Math.random()*9 + 9).toFixed(1)+'s');
-      p.style.setProperty('--delay', (Math.random()*10).toFixed(1)+'s');
-      p.style.setProperty('--drift', ((Math.random()*120 - 60)).toFixed(0)+'px');
-      p.style.setProperty('--op', (Math.random()*0.5 + 0.4).toFixed(2));
-      frag.appendChild(p);
-    }
-    dust.appendChild(frag);
-
-    /* ---- date num: Playfair sits low — anchor at 35% between Agosto and 2026 ---- */
-    function calibrateDateNum(){
-      var block = document.querySelector('.date');
-      var month = document.querySelector('.date-month');
-      var year = document.querySelector('.date-year');
-      var num = document.querySelector('.date-num');
-      if(!block || !month || !year || !num) return;
-
-      num.style.transform = '';
-
-      var m = month.getBoundingClientRect();
-      var y = year.getBoundingClientRect();
-      var n = num.getBoundingClientRect();
-      var span = y.bottom - m.top;
-      if(span <= 0) return;
-
-      var anchor = parseFloat(getComputedStyle(block).getPropertyValue('--date-num-anchor')) || 0.35;
-      var target = m.top + span * anchor;
-      var shift = target - (n.top + n.height / 2);
-
-      if(Math.abs(shift) > 0.5){
-        num.style.transform = 'translateY(' + shift.toFixed(2) + 'px)';
-      }
-    }
-
-    function scheduleDateNumCalibrate(){
-      calibrateDateNum();
-      requestAnimationFrame(calibrateDateNum);
-    }
-
-    if(document.fonts && document.fonts.ready){
-      document.fonts.ready.then(scheduleDateNumCalibrate);
-    } else {
-      scheduleDateNumCalibrate();
-    }
-    window.addEventListener('resize', calibrateDateNum);
-
-    /* ---- open sequence ---- */
-    function setLetterOrigin(){
-      var env = document.querySelector('.envelope');
-      var paper = document.querySelector('.paper');
-      if(!env || !paper) return;
-
-      var er = env.getBoundingClientRect();
-      var pr = paper.getBoundingClientRect();
-      if(pr.width <= 0 || er.width <= 0) return;
-
-      /* a carta que surge é um pouco menor que o envelope (não fininha) */
-      var scale = (er.width * 0.9) / pr.width;
-      if(!isFinite(scale) || scale <= 0) scale = 0.22;
-
-      /* topo da mini-carta na boca do envelope, de onde o "V" aparece */
-      var targetTop = er.top + er.height * 0.16;
-      var liftY = targetTop - pr.top;
-      document.documentElement.style.setProperty('--lift-s', scale.toFixed(4));
-      document.documentElement.style.setProperty('--lift-y', liftY.toFixed(1) + 'px');
-    }
-
-    function settleInvite(){
-      if(settled) return;
-      settled = true;
-      body.classList.add('is-settled');
-      scheduleDateNumCalibrate();
-      cover.setAttribute('aria-hidden','true');
-      var h = document.querySelector('.invite');
-      if(h){
-        h.setAttribute('aria-hidden','false');
-        h.setAttribute('tabindex','-1');
-        h.focus({preventScroll:true});
-      }
-    }
 
     function open(){
-      if(opened) return;
+      if (opened) return;
       opened = true;
-      body.classList.remove('is-sealed');
-      body.classList.add('is-open');
-      setLetterOrigin();
-      requestAnimationFrame(function(){
-        requestAnimationFrame(setLetterOrigin);
-      });
-      var paper = document.querySelector('.paper');
-      if(paper){
-        paper.addEventListener('animationend', function onEnd(e){
-          if(e.animationName !== 'letterRise') return;
-          paper.removeEventListener('animationend', onEnd);
-          settleInvite();
-        });
-      }
-      setTimeout(settleInvite, 3200);
+      cover.classList.add('open');
+    }
+    function close(){
+      opened = false;
+      cover.classList.remove('open');
     }
 
-    window.addEventListener('resize', function(){
-      if(body.classList.contains('is-open') && !body.classList.contains('is-settled')) setLetterOrigin();
-    });
-
     cover.addEventListener('click', open);
-    cover.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); }
-    });
+    closeBtn.addEventListener('click', close);
 
-    /* placeholder links: don't jump to top of page when unset */
-    document.querySelectorAll('a[data-needs-link]').forEach(function(a){
-      a.addEventListener('click', function(e){
-        if(a.getAttribute('href') === '#'){ e.preventDefault(); }
-      });
+    window.addEventListener('keydown', function(e){
+      if ((e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') && !opened) {
+        e.preventDefault();
+        open();
+      }
     });
-
-    if(location.search.indexOf('open') !== -1) open();
   })();
 </script>
 </body>
