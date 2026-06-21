@@ -368,6 +368,62 @@
   @media (max-width:340px){
     .date{ --date-pad:10px; }
   }
+
+  /* ============================================================
+     CONFIRMAÇÃO DE PRESENÇA — modal embutido no convite.
+     Mesmo sistema do site (Supabase), porém sem sair do convite.
+     ============================================================ */
+  button.action{ background:none; border:none; padding:0; font:inherit; cursor:pointer; }
+
+  .cfm{ position:fixed; inset:0; z-index:9999; display:grid; place-items:center; padding:16px; }
+  .cfm[hidden]{ display:none; }
+  .cfm__backdrop{ position:absolute; inset:0; background:rgba(30,12,4,.55); backdrop-filter:blur(2px); animation:cfmFade .25s ease; }
+  .cfm__card{
+    position:relative; width:100%; max-width:440px; max-height:90vh; overflow:auto;
+    background:var(--cream); border:1px solid var(--line); border-radius:16px;
+    box-shadow:0 30px 60px -28px rgba(40,12,4,.6); padding:clamp(20px,5vw,30px);
+    animation:cfmUp .3s var(--ease-out);
+  }
+  @keyframes cfmFade{ from{opacity:0} to{opacity:1} }
+  @keyframes cfmUp{ from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+  .cfm__x{ position:absolute; top:10px; right:14px; background:none; border:none; font-size:26px; line-height:1; color:var(--mauve); cursor:pointer; }
+  .cfm__title{ font-family:var(--display); font-size:clamp(20px,5vw,26px); color:var(--terra); text-align:center; margin:0 0 4px; font-weight:500; }
+  .cfm__intro{ font-family:var(--body); font-size:14px; color:var(--mauve); text-align:center; margin:0 0 16px; }
+  .cfm__input{ width:100%; padding:12px 14px; font:inherit; font-family:var(--body); font-size:16px; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:10px; }
+  .cfm__input:focus{ outline:none; border-color:var(--terra); box-shadow:0 0 0 3px rgba(123,42,19,.14); }
+  .cfm__hint{ font-size:12px; color:var(--mauve); margin:8px 2px 0; font-family:var(--body); }
+  .cfm__stage:not(:empty){ margin-top:14px; }
+
+  .cfm__results{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px; }
+  .cfm__result{ width:100%; text-align:left; background:none; border:none; border-radius:8px; padding:11px 12px; cursor:pointer; font-family:var(--body); transition:background .2s; }
+  .cfm__result:hover,.cfm__result:focus-visible{ background:var(--cream-2); outline:none; }
+  .cfm__rname{ display:block; font-weight:600; color:var(--terra); font-size:16px; }
+  .cfm__rctx{ display:block; font-size:12.5px; color:var(--mauve); }
+  .cfm__empty{ font-size:14px; color:var(--mauve); padding:10px 12px; font-family:var(--body); margin:0; }
+  .cfm__nf{ display:block; width:100%; margin-top:6px; padding:11px; background:none; border:none; border-top:1px dashed var(--line); color:var(--terra); font-family:var(--body); font-weight:600; font-size:14px; text-align:center; cursor:pointer; }
+  .cfm__nf:hover{ background:var(--cream-2); }
+
+  .cfm__back{ background:none; border:none; color:var(--mauve); font-family:var(--body); font-weight:600; font-size:14px; cursor:pointer; padding:2px 0; margin-bottom:8px; }
+  .cfm__greet{ font-family:var(--body); font-size:17px; color:var(--ink); margin:0 0 2px; }
+  .cfm__greet strong{ color:var(--terra); }
+  .cfm__sub{ font-size:13.5px; color:var(--mauve); margin:0 0 12px; font-family:var(--body); }
+  .cfm__already{ display:flex; gap:8px; align-items:baseline; margin:0 0 12px; padding:10px 12px; border-radius:10px; background:rgba(123,42,19,.08); border:1px solid rgba(123,42,19,.25); color:var(--ink); font-size:13.5px; font-family:var(--body); line-height:1.4; }
+  .cfm__already::before{ content:"✓"; color:var(--terra); font-weight:700; }
+  .cfm__people{ list-style:none; margin:0 0 16px; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .cfm__person{ display:flex; align-items:center; gap:11px; padding:11px 13px; background:#fff; border:1px solid var(--line); border-radius:10px; cursor:pointer; }
+  .cfm__person:hover{ border-color:var(--terra); }
+  .cfm__check{ width:20px; height:20px; flex:none; accent-color:var(--terra); cursor:pointer; }
+  .cfm__pinfo{ display:flex; flex-direction:column; gap:2px; }
+  .cfm__pname{ display:flex; align-items:center; gap:8px; font-weight:600; color:var(--ink); font-family:var(--body); }
+  .cfm__prel{ font-size:12px; color:var(--mauve); font-style:italic; }
+  .cfm__pstatus{ font-size:12px; color:#6a8b3a; font-weight:600; }
+  .cfm__you{ font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:var(--mauve); border-radius:999px; padding:2px 8px; }
+  .cfm__wa{ display:flex; align-items:center; justify-content:center; gap:9px; width:100%; border:none; border-radius:999px; padding:13px 18px; font-family:var(--sans); font-size:15px; font-weight:600; color:#fff; background:#25d366; box-shadow:0 12px 24px -14px rgba(37,211,102,.8); text-decoration:none; cursor:pointer; transition:background .2s, transform .2s; }
+  .cfm__wa:hover{ background:#1da851; transform:translateY(-2px); }
+  .cfm__wa--soft{ background:var(--mauve); box-shadow:none; }
+  .cfm__wa svg{ width:22px; height:22px; flex:none; }
+  .cfm__note{ font-size:12px; color:var(--mauve); text-align:center; margin:10px 0 0; font-family:var(--body); }
+  .cfm__sitelink{ display:block; text-align:center; margin:12px 0 0; font-family:var(--body); font-size:13px; color:var(--terra); }
 </style>
 </head>
 <body class="is-sealed">
@@ -451,13 +507,12 @@
             <span class="label">Como chegar</span>
           </a>
 
-          <a class="action" target="_blank" rel="noopener"
-             href="https://luiserh.github.io/site-convidados/#rsvp">
+          <button class="action" type="button" id="btnConfirmar">
             <span class="coin" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.4 2.6 2.6L16 9.4"/></svg>
             </span>
             <span class="label">Confirmar presença</span>
-          </a>
+          </button>
 
           <a class="action" target="_blank" rel="noopener"
              href="https://luiserh.github.io/site-convidados/">
@@ -538,6 +593,195 @@
 
     if(location.search.indexOf('open') !== -1) open();
   })();
+</script>
+
+<!-- ============ CONFIRMAÇÃO DE PRESENÇA (modal embutido) ============ -->
+<div class="cfm" id="cfm" hidden>
+  <div class="cfm__backdrop" data-cfm-close></div>
+  <div class="cfm__card" role="dialog" aria-modal="true" aria-label="Confirmar presença">
+    <button class="cfm__x" data-cfm-close aria-label="Fechar">×</button>
+    <h2 class="cfm__title">Confirmar presença</h2>
+    <p class="cfm__intro">Digite o seu nome para se encontrar na lista. Se o seu convite inclui mais pessoas, você confirma todas de uma vez.</p>
+    <input class="cfm__input" id="cfmInput" type="text" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Comece a digitar o seu nome…" />
+    <p class="cfm__hint" id="cfmHint">Digite ao menos 3 letras para buscar.</p>
+    <div class="cfm__stage" id="cfmStage" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+/* Confirmação de presença — MESMO sistema do site (site-convidados/rsvp.js),
+   embutido no convite para não tirar o convidado daqui. Backend compartilhado
+   (Supabase): a confirmação feita aqui ou no site é a mesma, e o aviso de
+   "fulano já confirmou" funciona entre os dois.
+   Obs.: lógica espelhada do site — ao mudar lá, refletir aqui. */
+(function () {
+  'use strict';
+  var DB = { url: 'https://bvnzsijtdjymfbslevia.supabase.co', anonKey: 'sb_publishable_tX-2tf8oFMCxAG1sKXfdKg_RKCRPDeS' };
+  var WPP = '5591985924776';            // PENDENTE: nº da cerimonialista
+  var CASAL = 'Iasmin e Luis';
+  var SITE = 'https://luiserh.github.io/site-convidados/';
+  var MIN = 3, MAX = 8;
+
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var norm = function (s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+  var first = function (n) { return (n || '').trim().split(/\s+/)[0] || n; };
+  var waLink = function (m) { return 'https://wa.me/' + WPP + '?text=' + encodeURIComponent(m); };
+  var dataCurta = function (iso) { try { return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }); } catch (e) { return ''; } };
+  var WA_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
+
+  function rpc(fn, body) {
+    return fetch(DB.url + '/rest/v1/rpc/' + fn, {
+      method: 'POST',
+      headers: { apikey: DB.anonKey, Authorization: 'Bearer ' + DB.anonKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body || {})
+    });
+  }
+  function status(id) { return rpc('rsvp_status', { p_convite_id: id }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
+  function confirmar(id, por, vai, nao) {
+    try { rpc('rsvp_confirmar', { p_convite_id: id, p_confirmado_por: por, p_presentes: vai, p_ausentes: nao }).catch(function () {}); } catch (e) {}
+  }
+
+  // Mensagem humanizada — idêntica ao site (sem emoji, sem negrito).
+  function buildMessage(eu, conv, vindo, nao) {
+    var intro = 'Olá! Aqui é ' + eu + '.';
+    var ausentes = '';
+    if (nao.length) { ausentes = '\n\n' + (nao.length === 1 ? 'Não poderá comparecer' : 'Não poderão comparecer') + ':\n' + nao.map(function (n) { return '- ' + n; }).join('\n'); }
+    if (vindo.length === 0) return intro + '\nInfelizmente não poderei comparecer ao casamento. Agradeço muito o convite!';
+    if (vindo.length === 1 && vindo[0] === eu) return intro + '\nGostaria de confirmar a minha presença no casamento.' + ausentes;
+    if (vindo.length === 1) return intro + '\nGostaria de confirmar a presença de ' + vindo[0] + ' no casamento.' + ausentes;
+    return intro + '\nGostaria de confirmar a presença no casamento das seguintes pessoas:\n' + vindo.map(function (n) { return '- ' + n; }).join('\n') + ausentes;
+  }
+
+  var base = null, index = [], els = {};
+
+  function buildIndex() {
+    index = [];
+    base.convites.forEach(function (c, ci) {
+      c.membros.forEach(function (m) { index.push({ nome: m.nome, norm: norm(m.nome), ci: ci }); });
+    });
+  }
+  function search(raw) {
+    var q = norm(raw); if (q.length < MIN) return [];
+    var hits = [];
+    index.forEach(function (r) {
+      var sc; if (r.norm.indexOf(q) === 0) sc = 0; else if (r.norm.split(' ').some(function (t) { return t.indexOf(q) === 0; })) sc = 1; else if (r.norm.indexOf(q) !== -1) sc = 2; else return;
+      hits.push({ r: r, sc: sc });
+    });
+    hits.sort(function (a, b) { return a.sc - b.sc || a.r.norm.localeCompare(b.r.norm); });
+    return hits;
+  }
+
+  function showResults(raw) {
+    if (!base) { els.stage.innerHTML = '<p class="cfm__empty">Carregando lista…</p>'; return; }
+    var hits = search(raw), shown = hits.slice(0, MAX), html = '';
+    if (!shown.length) { html += '<p class="cfm__empty">Não encontramos esse nome. Confira a digitação ou use a opção abaixo.</p>'; }
+    else {
+      html += '<ul class="cfm__results">';
+      shown.forEach(function (h) {
+        var c = base.convites[h.r.ci];
+        var outros = c.membros.map(function (m) { return m.nome; }).filter(function (n) { return n !== h.r.nome; });
+        var ctx = c.membros.length > 1 ? ('Convite de ' + c.titulo + (outros.length ? ' · com ' + outros.join(', ') : '')) : 'Convite individual';
+        html += '<li><button type="button" class="cfm__result" data-ci="' + h.r.ci + '" data-nome="' + esc(h.r.nome) + '"><span class="cfm__rname">' + esc(h.r.nome) + '</span><span class="cfm__rctx">' + esc(ctx) + '</span></button></li>';
+      });
+      html += '</ul>';
+    }
+    html += '<button type="button" class="cfm__nf" data-act="nf">Não encontrei meu nome na lista</button>';
+    els.stage.innerHTML = html;
+  }
+
+  function showPanel(ci, eu) {
+    var c = base.convites[ci]; if (!c) return;
+    els.stage.innerHTML = '<button type="button" class="cfm__back" data-act="back">← buscar outro nome</button><p class="cfm__empty">Verificando confirmações…</p>';
+    status(c.id).then(function (list) {
+      var map = {}; list.forEach(function (s) { map[norm(s.convidado_nome)] = s; });
+      var meu = map[norm(eu)];
+      var solo = c.membros.length === 1;
+      var html = '<button type="button" class="cfm__back" data-act="back">← buscar outro nome</button>';
+      html += '<p class="cfm__greet">Olá, <strong>' + esc(first(eu)) + '</strong>! Que alegria ter você com a gente.</p>';
+      if (meu && meu.vai) {
+        var quando = dataCurta(meu.atualizado_em);
+        var porOutro = norm(meu.confirmado_por) !== norm(eu);
+        html += '<p class="cfm__already">' + (porOutro ? '<strong>' + esc(meu.confirmado_por) + '</strong> já confirmou a sua presença' : 'Você já confirmou a sua presença') + (quando ? ' em ' + quando : '') + '. Pode revisar abaixo se precisar.</p>';
+      } else if (meu && meu.vai === false) {
+        html += '<p class="cfm__already">Você consta como <strong>não vai comparecer</strong>. Pode alterar abaixo.</p>';
+      }
+      html += '<p class="cfm__sub">' + (solo ? 'Confirme a sua presença:' : 'Marque quem vai ao casamento:') + '</p>';
+      html += '<ul class="cfm__people">';
+      c.membros.forEach(function (m) {
+        var st = map[norm(m.nome)];
+        var checked = st ? st.vai : true;
+        var line = ''; if (st && st.vai) line = '<span class="cfm__pstatus">✓ confirmado por ' + esc(st.confirmado_por) + '</span>'; else if (st && st.vai === false) line = '<span class="cfm__prel">marcado como ausente</span>';
+        html += '<li><label class="cfm__person"><input type="checkbox" class="cfm__check" data-nome="' + esc(m.nome) + '"' + (checked ? ' checked' : '') + ' /><span class="cfm__pinfo"><span class="cfm__pname">' + esc(m.nome) + (m.nome === eu ? '<span class="cfm__you">você</span>' : '') + '</span>' + (m.rel ? '<span class="cfm__prel">' + esc(m.rel) + '</span>' : '') + line + '</span></label></li>';
+      });
+      html += '</ul>';
+      html += '<a class="cfm__wa" id="cfmWa" href="#" target="_blank" rel="noopener">' + WA_ICON + '<span class="cfm__walabel">Confirmar no WhatsApp</span></a>';
+      html += '<p class="cfm__note">Sua confirmação fica registrada e você é levado ao WhatsApp com a mensagem pronta.</p>';
+      html += '<a class="cfm__sitelink" href="' + SITE + '" target="_blank" rel="noopener">Conhecer o site dos noivos →</a>';
+      els.stage.innerHTML = html;
+
+      var wa = $('#cfmWa', els.stage), label = $('.cfm__walabel', wa);
+      var checks = [].slice.call(els.stage.querySelectorAll('.cfm__check'));
+      var sel = function () { return { vindo: checks.filter(function (c) { return c.checked; }).map(function (c) { return c.dataset.nome; }), nao: checks.filter(function (c) { return !c.checked; }).map(function (c) { return c.dataset.nome; }) }; };
+      var refresh = function () { var s = sel(); wa.href = waLink(buildMessage(eu, c, s.vindo, s.nao)); label.textContent = s.vindo.length === 0 ? 'Avisar que não poderei ir' : 'Confirmar no WhatsApp'; wa.classList.toggle('cfm__wa--soft', s.vindo.length === 0); };
+      checks.forEach(function (c) { c.addEventListener('change', refresh); });
+      wa.addEventListener('click', function () { var s = sel(); confirmar(c.id, eu, s.vindo, s.nao); });
+      refresh();
+    });
+  }
+
+  function showNotFound() {
+    var typed = els.input.value.trim();
+    var msg = 'Olá! Tentei confirmar presença, mas não encontrei o meu nome na lista.\n\nMeu nome é: ' + (typed || '(escrever aqui)') + '\n\nPodem me ajudar?';
+    els.stage.innerHTML = '<p class="cfm__empty">Não achou o seu nome? Sem problemas! Fale com a gente que conferimos pra você.</p><a class="cfm__wa" href="' + esc(waLink(msg)) + '" target="_blank" rel="noopener">' + WA_ICON + '<span>Falar no WhatsApp</span></a><button type="button" class="cfm__back" data-act="back" style="margin-top:12px">← tentar buscar de novo</button>';
+  }
+
+  function fallback() {
+    var msg = 'Olá! Gostaria de confirmar a minha presença no casamento.';
+    els.stage.innerHTML = '<p class="cfm__empty">A busca está indisponível agora. Confirme falando com a gente.</p><a class="cfm__wa" href="' + waLink(msg) + '" target="_blank" rel="noopener">' + WA_ICON + '<span>Confirmar no WhatsApp</span></a>';
+  }
+
+  function wire() {
+    els.input.addEventListener('input', function () {
+      var v = els.input.value.trim();
+      if (norm(v).length < MIN) { els.stage.innerHTML = ''; els.hint.textContent = 'Digite ao menos 3 letras para buscar.'; return; }
+      els.hint.textContent = 'Toque no seu nome para confirmar.';
+      showResults(v);
+    });
+    els.stage.addEventListener('click', function (e) {
+      var res = e.target.closest('.cfm__result');
+      if (res) { showPanel(+res.dataset.ci, res.dataset.nome); return; }
+      var act = (e.target.closest('[data-act]') || {}).dataset ? e.target.closest('[data-act]').dataset.act : null;
+      if (act === 'nf') showNotFound();
+      else if (act === 'back') { var v = els.input.value.trim(); if (norm(v).length >= MIN) showResults(v); else els.stage.innerHTML = ''; els.input.focus(); }
+    });
+  }
+
+  var loaded = false;
+  function openModal() {
+    els.modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { els.input.focus(); }, 60);
+    if (loaded) return; loaded = true;
+    rpc('rsvp_lista_publica', {}).then(function (r) { return r.ok ? r.json() : null; }).then(function (live) {
+      base = live && live.convites && live.convites.length ? live : null;
+      if (!base) { fallback(); return; }
+      buildIndex();
+      // Se o convidado já começou a digitar enquanto carregava, re-renderiza.
+      if (norm(els.input.value).length >= MIN) showResults(els.input.value.trim());
+    }).catch(function () { fallback(); });
+  }
+  function closeModal() { els.modal.hidden = true; document.body.style.overflow = ''; }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    els.modal = $('#cfm'); els.input = $('#cfmInput'); els.hint = $('#cfmHint'); els.stage = $('#cfmStage');
+    wire(); // listeners ativos desde já; o base carrega em paralelo
+    var btn = $('#btnConfirmar');
+    if (btn) btn.addEventListener('click', openModal);
+    els.modal.addEventListener('click', function (e) { if (e.target.hasAttribute('data-cfm-close')) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !els.modal.hidden) closeModal(); });
+  });
+})();
 </script>
 </body>
 </html>
